@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+* {
+  font-family: 'Rubik', sans-serif;
+}
+
+body {
+  font-family: 'Rubik', sans-serif;
+  width: 375px;
+  height: 812px;
+  min-width: 375px;
+  min-height: 812px;
+  max-width: 375px;
+  max-height: 812px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@viewport {
+  width: 375px;
+  height: 812px;
+}
