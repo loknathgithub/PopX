@@ -5,7 +5,6 @@ import '../index.css';
 
 const SignIn = () => {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
     const {isAuthenticated} = useSelector((state) => state.user.user);
 
     const [data, setData] = useState({
@@ -13,17 +12,7 @@ const SignIn = () => {
         password: ""
     });
     const [error, setError] = useState({});
-    const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const handleLoginSuccess = (data) => {
-        const {user, accessToken, refreshToken} = data;
-        const userData = {
-            user,
-            accessToken,
-            refreshToken
-        };
-        dispatch(setUserData(userData));
-    };
 
     const validateForm = () => {
         const newErrors = {};
@@ -33,43 +22,10 @@ const SignIn = () => {
         setError(newErrors);
         return Object.keys(newErrors).length === 0;
     }
-
-    const inputChange = (e) => {
-        const {name, value} = e.target;
-        setData({
-            ...data,
-            [name]: value
-        });
-        
-        if(error[name]) {
-            setError(prev => ({...prev, [name]: ""}));
-        }
-    };
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         if(!validateForm()) return;
-
         setIsSubmitting(true);
-        // try {
-        //     const response = await axios.post("Backend Url", data, {
-        //       headers: {
-        //         'Content-Type': 'application/json'
-        //       }
-        //     });
-      
-        //     if (response.status === 200) {
-        //       handleLoginSuccess(response.data.data);
-        //     }
-        //   } catch (error) {
-        //     console.error('Login error:', error);
-        //     setErrors(prev => ({
-        //       ...prev,
-        //       submit: error.response?.data?.message || 'Invalid email or password'
-        //     }));
-        //   } finally {
-        //     setIsSubmitting(false);
-        // }
     }
 
     const handleClick = () => {
@@ -83,16 +39,16 @@ const SignIn = () => {
     }, [isAuthenticated])
 
     return (
-        <div className="min-h-screen flex items-center justify-center p-6">
-          <div className="w-full max-w-sm p-6 rounded-lg bg-[#F7F8F9] h-screen">
-            <h2 className="text-[28px] font-semibold text-[#1D2226] font-medium">Signin to your <br/> PopX account</h2>
+        <div className="min-h-screen flex items-center justify-center p-6 m-4">
+          <div className="w-93 max-w-md p-6 rounded-lg bg-[#F7F8F9] flex h-200 flex-col shadow-lg">
+            <h2 className="text-2xl font-medium text-gray-900 mb-6">Signin to your <br/> PopX account</h2>
             <p className="text-gray-500 mt-2 mb-6 p-text">
               Lorem ipsum dolor sit amet,<br />consectetur adipiscing elit,
             </p>
     
             <form className="space-y-5">
 
-              <div class="my-2 relative">
+              <div class="w-80 h-16 my-2 relative py-1.5">
                 <label class="text-sm  text-[#6C25FF] block mb-[-20px] mx-2 px-2 bg-[#F7F8F9] w-fit absolute">
                     Email address 
                 </label>
@@ -100,11 +56,11 @@ const SignIn = () => {
                     type="email"
                     id="email"
                     placeholder="Enter email address" 
-                    className="w-[335px] h-[45px] border border-[#E4E7EC] rounded-[6px] p-3 mt-2 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500"
+                    className="w-80 h-12 border border-[#bebebe] rounded-[6px] p-3 mt-2 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500"
                 />
                 </div>
     
-                <div class="my-2 relative">
+                <div class="my-2 relative py-1.5">
                 <label class="text-sm  text-[#6C25FF] block mb-[-20px] mx-2 px-2 bg-[#F7F8F9] w-fit absolute">
                     Password 
                 </label>
@@ -112,13 +68,13 @@ const SignIn = () => {
                     type="password"
                     id="password"
                     placeholder="Enter password" 
-                    className="w-[335px] h-[45px] border border-[#E4E7EC] rounded-[6px] p-3 mt-2 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500"
+                    className="w-80 h-12 border border-[#bebebe] rounded-[6px] p-3 mt-2 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500"
                 />
                 </div>
     
               <button
                 type="submit"
-                className="w-full my-3 py-3 bg-gray-300 text-white font-semibold rounded-md"
+                className="w-80 h-12 my-3 py-3 bg-gray-300 text-white font-medium rounded-md"
                 onClick={handleClick}
               >
                 Login
